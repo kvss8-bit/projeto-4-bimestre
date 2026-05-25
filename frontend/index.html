@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Autenticação 2FA</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 350px; }
+        input { width: 80%; padding: 10px; font-size: 20px; text-align: center; letter-spacing: 5px; border: 2px solid #ccc; border-radius: 4px; margin: 15px 0; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 85%; }
+        button:hover { background: #0056b3; }
+        .error { color: red; margin-top: 10px; font-size: 14px; }
+        .success { color: green; margin-top: 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
 
+<div class="card">
+    <h2>Código de Verificação</h2>
+    <p>Introduza o código de 6 dígitos enviado para o seu e-mail[cite: 9, 17].</p>
+    
+    <input type="text" id="otp" maxlength="6" placeholder="000000" autofocus autocomplete="off">
+    
+    <button onclick="verificarCodigo()">Verificar Código</button>
+    <div id="mensagem"></div>
+</div>
+
+<script>
+    async function verificarCodigo() {
+        const codigo = document.getElementById('otp').value;
+        const msgDiv = document.getElementById('mensagem');
+        
+        if(codigo.length !== 6) {
+            msgDiv.className = 'error';
+            msgDiv.innerText = 'O código deve ter 6 dígitos[cite: 12].';
+            return;
+        }
+
+        // Chamada simulada para o Endpoint Backend POST /v1/auth/verify-otp
+        try {
+            const response = await fetch('/v1/auth/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: codigo })
+            });
+            
+            // Simulação das Regras de Negócio no Frontend para a Demo
+            if (codigo === "123456") {
+                msgDiv.className = 'success';
+                msgDiv.innerText = 'Sucesso! Token JWT Criado[cite: 28].';
+            } else {
+                msgDiv.className = 'error';
+                msgDiv.innerText = 'Código Incorreto ou Expirado[cite: 19, 20].';
+            }
+        } catch (e) {
+            // Demonstração visual caso o backend simulado não responda
+            if (codigo === "123456") {
+                msgDiv.className = 'success';
+                msgDiv.innerText = 'Sucesso (Simulado)! Token JWT Criado[cite: 28].';
+            } else {
+                msgDiv.className = 'error';
+                msgDiv.innerText = 'Código Inválido! (Máximo 3 tentativas) [cite: 19].';
+            }
+        }
+    }
+
+    // Suporte a colar o código (Ctrl+V)
+    document.getElementById('otp').addEventListener('paste', (e) => {
+        const data = e.clipboardData.getData('text');
+        if(data.length === 6 && !isNaN(data)) {
+            document.getElementById('otp').value = data;
+        }
+    });
+</script>
+</body>
+</html>
