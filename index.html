@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-Estar Digital - Controle de Tempo de Tela</title>
+    <meta name="description" content="Controle de Tempo de Tela & Bem-Estar Digital. Menos tela, mais vida.">
+    
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #0f766e; 
+            --primary-hover: #115e59; 
+            --bg-color: #f8fafc; 
+            --card-bg: #ffffff;
+            --text-main: #0f172a; 
+            --text-muted: #64748b; 
+        }
+    }
+
+    @layer base {
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+        }
+    }
+
+    @layer components {
+        .btn-primary {
+            @apply px-5 py-2.5 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-hover)] hover:shadow-lg hover:-translate-y-0.5 transition-all font-medium duration-200;
+        }
+        .card {
+            @apply bg-[var(--card-bg)] p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow duration-300;
+        }
+        .nav-item {
+            @apply flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-teal-50 hover:text-teal-700 transition-colors cursor-pointer;
+        }
+        .nav-item.active {
+            @apply bg-teal-50 text-teal-700 font-medium;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script>const ChartJS = window.Chart;</script>
+    <script type="text/babel" src="components/Sidebar.js"></script>
+    <script type="text/babel" src="components/Dashboard.js"></script>
+    <script type="text/babel" src="components/BemEstar.js"></script>
+    <script type="text/babel" src="components/Historico.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

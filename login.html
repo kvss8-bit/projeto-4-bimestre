@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bem-Estar Digital</title>
+    
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #0f766e;
+            --primary-hover: #115e59;
+            --bg-color: #f8fafc;
+        }
+    }
+    @layer base {
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    }
+    @layer components {
+        .btn-primary {
+            @apply w-full px-5 py-3 bg-[var(--primary-color)] text-white rounded-xl hover:bg-[var(--primary-hover)] hover:shadow-lg hover:-translate-y-0.5 transition-all font-medium duration-200;
+        }
+        .input-field {
+            @apply w-full border border-slate-200 bg-slate-50 rounded-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all;
+        }
+    }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="root"></div>
+    <script type="text/babel" src="login-app.js"></script>
+</body>
+</html>
